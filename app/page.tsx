@@ -1,65 +1,95 @@
-import Image from "next/image";
+// app/page.tsx
+import GlitchText from "./components/GlitchText";
+import CyberTitle from "./components/CyberTitle";
+import NeuralBackground from "./components/NeuralBackground";
+import Dock from "./components/Dock";
+import { projects } from "./data/projects";
+import ProjectCard from "./components/ProjectCard";
+import DroneViewer from "./components/DroneViewer";
+
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main className="flex min-h-screen flex-col items-center justify-center bg-cyber-black p-24 relative overflow-hidden">
+      {/* --- 3D LAYER (NEW) --- */}
+      <NeuralBackground />
+
+      {/* --- ATMOSPHERE LAYERS START --- */}
+      
+      {/* 1. The Grid (Keep this, it's the base) */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+      
+      {/* 2. The Vignette (Darkens the corners deeply) */}
+      <div className="vignette" />
+
+      {/* 3. The Scanlines (Adds the monitor texture) */}
+      <div className="scanlines" />
+
+      {/* --- ATMOSPHERE LAYERS END --- */}
+
+
+      <div className="z-50 text-center space-y-6 flicker-effect">
+        <p className="text-neon-cyan text-sm tracking-[0.3em] uppercase opacity-80">
+          System Identity Verified
+        </p>
+        
+        {/* The New Active Component */}
+        <CyberTitle />
+        
+        <p className="text-gray-400 text-xl max-w-lg mx-auto font-light border-l-2 border-neon-purple pl-4 text-left">
+          <span className="text-neon-cyan">function</span> <span className="text-white">Architect</span>() {"{"} <br/>
+          &nbsp;&nbsp;return <span className="text-matrix-green">"Scalable Systems"</span>; <br/>
+          {"}"}
+        </p>
+      </div>
+      {/* THE ARSENAL SECTION */}
+      <div className="relative z-10 max-w-6xl mx-auto mt-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 pb-32">
+        {/* Map through your data here */}
+        {projects.map((p) => (
+          <ProjectCard key={p.id} {...p} />
+        ))}
+      </div>
+
+
+      {/* THE ARSENAL GRID */}
+      <div className="relative z-10 max-w-6xl mx-auto mt-32 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 pb-32">
+        
+        {/* 1. PIPELINE (Standard Card) */}
+        <ProjectCard 
+          title="Self-Healing Pipeline" 
+          category="Agentic AI" 
+          status="Active"
+          description="Autonomous error-correction system..."
+          tech={["Docker", "LLMs"]} 
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+
+        {/* 2. DRONE (The HERO Card) */}
+        <div className="relative group w-full bg-cyber-gray/40 backdrop-blur-md border border-neon-cyan/30 p-2 rounded-xl overflow-hidden hover:border-neon-cyan transition-colors">
+          <div className="absolute top-4 left-4 z-10">
+              <p className="text-neon-cyan text-xs font-mono uppercase">Simulation</p>
+              <h3 className="text-xl font-bold text-white">Drone Swarm</h3>
+          </div>
+          
+          {/* The 3D Component */}
+          <DroneViewer />
+          
+          <div className="absolute bottom-4 left-4 z-10 flex gap-2">
+              <span className="text-[10px] bg-black/50 px-2 py-1 rounded text-gray-300 border border-white/10">Unreal</span>
+              <span className="text-[10px] bg-black/50 px-2 py-1 rounded text-gray-300 border border-white/10">Simulink</span>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+        {/* 3. xBD (Standard Card) */}
+        <ProjectCard 
+          title="xBD Damage Assessment" 
+          category="Computer Vision" 
+          status="Deployed"
+          description="Satellite imagery analysis..."
+          tech={["PyTorch", "React"]} 
+        />
+
+      </div>
+      <Dock />
+    </main>
   );
 }
