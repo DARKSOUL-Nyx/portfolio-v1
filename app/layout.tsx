@@ -24,9 +24,15 @@ const rajdhani = Rajdhani({
   variable: '--font-rajdhani',
   weight: ["300", "400", "500", "600", "700"],
 });
+
 export const metadata: Metadata = {
   title: "DARKSOUL",
   description: "AI Engineer Portfolio",
+  icons: {
+    icon: "/icon.png",
+    // You can also specify different sizes if needed
+    // apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({
