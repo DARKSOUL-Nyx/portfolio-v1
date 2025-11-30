@@ -24,7 +24,7 @@ const AboutSection = () => {
                     className="space-y-6 text-gray-400 font-light leading-relaxed text-lg"
                 >
                     <p>
-                        <span className="text-neon-cyan font-mono">System Initiated:</span> I am <strong className="text-white">V.S.S.Nishwan</strong>.
+                        <span className="text-neon-cyan font-mono">System Initiated:</span> I am <strong className="text-white">Nishwan</strong>.
                     </p>
                     <p>
                         While others see AI as magic, I see it as <strong className="text-white">engineering</strong>.
