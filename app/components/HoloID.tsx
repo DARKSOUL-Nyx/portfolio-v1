@@ -17,7 +17,7 @@ const HoloID = () => {
             {/* The Image Container */}
             <div className="relative w-full h-full overflow-hidden rounded-xl grayscale group-hover:grayscale-0 transition-all duration-500 bg-cyber-black">
                 <Image
-                    src="/dp.jpg" // ⚠️ ACTION: Rename your file in public folder to 'DP.jpg' exactly, or change this string.
+                    src="dp.jpg" // ⚠️ ACTION: Rename your file in public folder to 'DP.jpg' exactly, or change this string.
                     alt="Identity"
                     fill
                     priority // Loads immediately (Crucial for LCP)

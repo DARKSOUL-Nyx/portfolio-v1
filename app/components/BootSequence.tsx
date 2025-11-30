@@ -8,7 +8,7 @@ const BootSequence = ({ onComplete }: { onComplete: () => void }) => {
     const lines = [
         "> ESTABLISHING SECURE CONNECTION...",
         "> BYPASSING FIREWALL [OK]",
-        "> MOUNTING KERNEL: V.S_NISHWAN",
+        "> MOUNTING KERNEL: DARK_SOUL",
         "> SYSTEM READY."
     ];
 
