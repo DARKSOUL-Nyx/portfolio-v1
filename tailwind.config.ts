@@ -8,6 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        mono: ['var(--font-jetbrains)'], // Code
+        display: ['var(--font-orbitron)'], // Headers (The "Cool" Font)
+        body: ['var(--font-rajdhani)'], // Reading Text
+      },
       colors: {
         // The "Dark Soul" Palette
         'cyber-black': '#020204', // Deeper than standard black
@@ -15,9 +20,6 @@ const config: Config = {
         'neon-cyan': '#00f3ff',   // Primary accent (Intelligence)
         'neon-purple': '#bc13fe', // Secondary accent (Creative)
         'matrix-green': '#00ff41', // Success states
-      },
-      fontFamily: {
-        mono: ['var(--font-jetbrains)'], // Connects to the layout setup
       },
     },
   },
