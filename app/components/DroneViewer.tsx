@@ -1,38 +1,41 @@
+// app/components/DroneViewer.tsx
 "use client";
 import { Canvas } from "@react-three/fiber";
-import { useGLTF, Stage, PresentationControls, Float, ContactShadows } from "@react-three/drei";
+import { useGLTF, Stage, PresentationControls, Float, Html, useProgress } from "@react-three/drei";
+import { Suspense } from "react";
+
+// A simple loading bar component
+function Loader() {
+  const { progress } = useProgress();
+  return <Html center className="text-neon-cyan font-mono text-xs">{progress.toFixed(0)}% LOADING...</Html>;
+}
 
 const DroneModel = () => {
-  // 1. Load the file from the public folder
   const { scene } = useGLTF("/drone.glb"); 
-  
-  return (
-    // 2. Scale it! Downloaded models are often HUGE or tiny. 
-    // Adjust scale={0.5} up or down until it fits.
-    <primitive 
-      object={scene} 
-      scale={0.1} // <--- START HERE. Change to 1.0 or 0.01 depending on the model size
-      rotation={[0, Math.PI / 4, 0]} // Initial rotation angle
-    />
-  );
+  return <primitive object={scene} />; // Removed manual scale, Stage will fix it
 };
 
 const DroneViewer = () => {
   return (
-    <div className="w-full h-64 cursor-grab active:cursor-grabbing">
+    <div className="w-full h-full cursor-grab active:cursor-grabbing">
       <Canvas dpr={[1, 2]} camera={{ fov: 45 }} shadows>
-        <Stage environment="city" intensity={0.5}>
-            <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-                <DroneModel />
-            </Float>
-            <ContactShadows position={[0, -1, 0]} opacity={0.6} blur={2} />
-        </Stage>
+        <Suspense fallback={<Loader />}>
+          <Stage environment="city" intensity={0.5} adjustCamera={1.2}> 
+              <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+                  <DroneModel />
+              </Float>
+          </Stage>
+        </Suspense>
+        
         <PresentationControls speed={1.5} global zoom={0.5} polar={[-0.1, Math.PI / 4]}>
-           <mesh /> {/* Invisible mesh to capture controls if needed */}
+           <mesh />
         </PresentationControls>
       </Canvas>
     </div>
   );
 };
+
+// Preload the model so it shows up instantly
+useGLTF.preload("/drone.glb");
 
 export default DroneViewer;
