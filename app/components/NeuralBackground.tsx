@@ -6,15 +6,15 @@ import * as THREE from "three";
 import { ScrollControls, useScroll } from "@react-three/drei"; // Import these
 const ParticleNetwork = () => {
   const count = 50; // Increased count slightly
-  
+
   const particles = useMemo(() => {
     const temp = [];
     for (let i = 0; i < count; i++) {
       const time = Math.random() * 100;
       const factor = 20 + Math.random() * 100;
       const speed = 0.01 + Math.random() / 200;
-      const x = Math.random() * 35 - 17.5; 
-      const y = Math.random() * 35 - 17.5; 
+      const x = Math.random() * 35 - 17.5;
+      const y = Math.random() * 35 - 17.5;
       const z = Math.random() * 35 - 17.5;
 
       temp.push({ time, factor, speed, x, y, z });
@@ -35,23 +35,23 @@ const ParticleNetwork = () => {
 
     const positionAttribute = points.current.geometry.getAttribute("position") as THREE.BufferAttribute;
     const linePositions = lines.current.geometry.getAttribute("position") as THREE.BufferAttribute;
-    
-    particles.forEach((particle, i) => {
-        const t = state.clock.getElapsedTime() * 0.2 + particle.time;
-        // Increased movement range slightly so you can see them moving
-        const movementRange = 0.8; 
-        const x = particle.x + Math.sin(t * particle.speed) * movementRange;
-        const y = particle.y + Math.cos(t * particle.speed) * movementRange;
-        const z = particle.z + Math.sin(t * particle.speed * 0.5) * movementRange;
 
-        positionAttribute.setXYZ(i, x, y, z);
+    particles.forEach((particle, i) => {
+      const t = state.clock.getElapsedTime() * 0.2 + particle.time;
+      // Increased movement range slightly so you can see them moving
+      const movementRange = 0.8;
+      const x = particle.x + Math.sin(t * particle.speed) * movementRange;
+      const y = particle.y + Math.cos(t * particle.speed) * movementRange;
+      const z = particle.z + Math.sin(t * particle.speed * 0.5) * movementRange;
+
+      positionAttribute.setXYZ(i, x, y, z);
     });
 
     positionAttribute.needsUpdate = true;
 
     let lineIndex = 0;
     const particleCount = particles.length;
-    
+
     for (let i = 0; i < particleCount; i++) {
       const x1 = positionAttribute.getX(i);
       const y1 = positionAttribute.getY(i);
@@ -61,15 +61,15 @@ const ParticleNetwork = () => {
         const x2 = positionAttribute.getX(j);
         const y2 = positionAttribute.getY(j);
         const z2 = positionAttribute.getZ(j);
-        const dist = Math.sqrt((x1-x2)**2 + (y1-y2)**2 + (z1-z2)**2);
+        const dist = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2);
 
         if (dist < 12) {
-            linePositions.setXYZ(lineIndex++, x1, y1, z1);
-            linePositions.setXYZ(lineIndex++, x2, y2, z2);
+          linePositions.setXYZ(lineIndex++, x1, y1, z1);
+          linePositions.setXYZ(lineIndex++, x2, y2, z2);
         }
       }
     }
-    
+
     lines.current.geometry.setDrawRange(0, lineIndex);
     linePositions.needsUpdate = true;
   });
@@ -81,14 +81,14 @@ const ParticleNetwork = () => {
           <bufferAttribute
             attach="attributes-position"
             count={count}
-            args={[new Float32Array(count * 3), 3]} 
+            args={[new Float32Array(count * 3), 3]}
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.5} // Bigger dots (Easier to see)
+          size={0.4} // Bigger dots (Easier to see)
           color="#e2e8f0" // Bright Slate (Almost White)
           transparent
-          opacity={0.7} // Full Opacity (No fading)
+          opacity={0.2} // Full Opacity (No fading)
           sizeAttenuation
         />
       </points>
@@ -104,7 +104,7 @@ const ParticleNetwork = () => {
         <lineBasicMaterial
           color="#94a3b8" // Visible Gray lines
           transparent
-          opacity={0.2} 
+          opacity={0.2}
         />
       </lineSegments>
     </group>
@@ -128,11 +128,11 @@ const ParticleNetwork = () => {
 
 const CameraController = () => {
   const scroll = useScroll(); // Gives us scroll progress (0 to 1)
-  
+
   useFrame((state) => {
     // Move camera Z position based on scroll
     // Starts at 25, moves to 10 as you scroll down
-    const targetZ = 25 - (scroll.offset * 15); 
+    const targetZ = 25 - (scroll.offset * 15);
     state.camera.position.z = THREE.MathUtils.lerp(state.camera.position.z, targetZ, 0.1);
   });
   return null;
@@ -145,8 +145,8 @@ const NeuralBackground = () => {
       <Canvas camera={{ position: [0, 0, 25], fov: 50 }}>
         {/* We need ScrollControls to track the page scroll */}
         <ScrollControls pages={2} damping={0.3}>
-           <CameraController />
-           <ParticleNetwork />
+          <CameraController />
+          <ParticleNetwork />
         </ScrollControls>
       </Canvas>
     </div>

@@ -1,15 +1,14 @@
-// app/hooks/useScramble.ts
 import { useEffect, useState, useRef } from "react";
 
 const CYBER_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=[]{}|;:,.<>?";
 
-export const useScramble = (targetText: string, speed: number = 30) => {
+export const useScramble = (targetText: string, speed: number = 30, trigger: boolean = true) => {
   const [text, setText] = useState(targetText);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const scramble = () => {
+  // We expose a 'play' function so we can restart it manually if needed
+  const play = () => {
     let iterations = 0;
-
     if (intervalRef.current) clearInterval(intervalRef.current);
 
     intervalRef.current = setInterval(() => {
@@ -29,9 +28,16 @@ export const useScramble = (targetText: string, speed: number = 30) => {
         if (intervalRef.current) clearInterval(intervalRef.current);
       }
 
-      iterations += 1 / 3; // Controls how fast the real letters reveal
+      iterations += 1 / 3;
     }, speed);
   };
 
-  return { text, scramble };
+  // Watch the 'trigger'. If it turns true, START.
+  useEffect(() => {
+    if (trigger) {
+      play();
+    }
+  }, [trigger]);
+
+  return { text, scramble: play };
 };
