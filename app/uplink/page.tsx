@@ -45,7 +45,7 @@ export default function Uplink() {
                     {[
                         { name: "EMAIL", icon: Mail, val: "Send Transmission", link: "mailto:vssnishwan@gmail.com" },
                         { name: "GITHUB", icon: Github, val: "View Repositories", link: "https://github.com/DARKSOUL-Nyx" },
-                        { name: "LINKEDIN", icon: Linkedin, val: "Connect Network", link: "https://www.linkedin.com/in/vss-nishwan-895222319/" },
+                        { name: "LINKEDIN", icon: Linkedin, val: "Connect Network", link: "https://www.linkedin.com/in/vasamsetty-satya-surya-nishwan-895222319/" },
                         { name: "TWITTER", icon: Twitter, val: "Follow Stream", link: "https://x.com/vssnishwan" },
                     ].map((item, i) => (
                         <a

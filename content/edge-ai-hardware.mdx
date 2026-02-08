@@ -1,0 +1,40 @@
+---
+title: "From Cloud to Edge: Deploying AI on Constrained Hardware"
+date: "2026-02-07"
+excerpt: "A strategic guide to moving heavy ML workloads from the cloud to the edge using Quantization, Pruning, and TensorRT on NVIDIA Jetson and Raspberry Pi."
+tags: ["Edge AI", "Hardware", "Optimization", "IoT"]
+readTime: "8 min read"
+status: "published"
+---
+
+## The "Why": Breaking the Cloud Dependence
+Cloud AI is powerful, but it comes with a "latency tax" and privacy risks that are unacceptable for mission-critical robotics or healthcare applications. The solution lies in **Edge AI**: running models locally on devices like the NVIDIA Jetson or Raspberry Pi.
+
+By moving inference to the edge, we achieve **zero-latency decision making** and guaranteed data privacy—essential for the next generation of autonomous agents.
+
+## The Hardware Landscape
+Choosing the right silicon is step zero. We generally look at two main contenders in the constrained hardware space:
+
+| Feature | Raspberry Pi 5 (The Generalist) | NVIDIA Jetson Orin Nano (The Specialist) |
+| :--- | :--- | :--- |
+| **Architecture** | CPU-heavy (ARM Cortex) | GPU-heavy (Ampere Architecture) |
+| **Best For** | Light inference, CPU models (TFLite) | Computer Vision, SLMs, Robotics |
+| **Acceleration** | NPU (in newer chips) | **CUDA & TensorRT** (Industry Standard) |
+
+> **Engineer's Note:** While the RPi is excellent for prototyping, if your pipeline involves heavy matrix multiplication (Transformers/CNNs), the CUDA cores on the Jetson are non-negotiable.
+
+## Core Techniques: Shrinking the Giants
+You cannot simply "run" a 7B parameter model on a 4GB RAM device. You must compress the signal.
+
+### 1. Quantization (FP32 $\rightarrow$ INT8)
+Standard models use 32-bit floating-point numbers. Quantization maps these to 8-bit integers, reducing model size by **4x** with negligible accuracy loss.
+
+```python
+import torch
+
+# Example of dynamic quantization in PyTorch
+quantized_model = torch.quantization.quantize_dynamic(
+    model, 
+    {torch.nn.Linear}, 
+    dtype=torch.qint8
+)
