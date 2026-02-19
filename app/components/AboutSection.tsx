@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import HoloID from "./HoloID"; // Ensure you created this in the previous step
+import HoloID from "./HoloID";
 
 const AboutSection = () => {
     return (
@@ -24,25 +24,24 @@ const AboutSection = () => {
                     className="space-y-6 text-gray-400 font-light leading-relaxed text-lg"
                 >
                     <p>
-                        <span className="text-neon-cyan font-mono">System Initiated:</span> I am <strong className="text-white">Nishwan</strong>.
+                        <span className="text-neon-cyan font-mono">System Initiated:</span> I am <strong className="text-white">Nishwan</strong>, known in the digital ether as <strong className="text-neon-purple">DARKSOUL</strong>.
                     </p>
                     <p>
-                        While others see AI as magic, I see it as <strong className="text-white">engineering</strong>.
-                        My mission is to deconstruct complex neural patterns and rebuild them into scalable,
-                        resilient systems that function in the real world.
+                        Currently completing my Computer Science Engineering degree at VIT Chennai, my primary objective is securing a role as an <strong className="text-white">AI Engineer</strong>. I specialize in building scalable systems and designing data-intensive applications. While others treat AI as magic, I treat it as rigorous engineering.
                     </p>
                     <p>
-                        Currently, I am focused on the intersection of <span className="text-neon-purple">Agentic Workflows</span> and
-                        <span className="text-neon-purple"> Autonomous Drone Swarms</span>.
-                        I don't just train models in notebooks; I build the DevOps infrastructure that allows them to survive in production.
+                        My work operates at the intersection of <span className="text-neon-cyan">Agentic Workflows</span>, <span className="text-neon-cyan">MLOps pipelines</span>, and <span className="text-neon-cyan">autonomous drone simulations</span>. I don't just train models in isolated notebooks; I build the DevOps infrastructure required for them to survive and perform in production environments.
+                    </p>
+                    <p className="text-sm border-l-2 border-white/10 pl-4 mt-6">
+                        When I'm not architecting data systems or solving DSA problems, I'm analyzing the striking art styles of <em>Arcane</em>, exploring the cinematography of <em>Cyberpunk 2077</em>, or tracking my strength training in the gym to balance the hours spent in the terminal.
                     </p>
 
                     <div className="pt-8 flex flex-wrap gap-4 font-mono text-xs text-neon-cyan">
                         <span className="border border-neon-cyan/30 px-3 py-1 rounded-full bg-neon-cyan/5">
-                            [ STATUS: LEARNING ]
+                            [ STATUS: FINAL_YEAR ]
                         </span>
                         <span className="border border-neon-cyan/30 px-3 py-1 rounded-full bg-neon-cyan/5">
-                            [ FOCUS: SYSTEM_DESIGN ]
+                            [ FOCUS: AI_INFRASTRUCTURE ]
                         </span>
                     </div>
                 </motion.div>
@@ -54,8 +53,7 @@ const AboutSection = () => {
                     transition={{ duration: 0.8 }}
                     className="relative flex justify-center"
                 >
-                    {/* Your Profile Picture Component */}
-                    <div className="w-full max-w-sm">
+                    <div className="w-full max-w-sm flex justify-center">
                         <HoloID />
                     </div>
                 </motion.div>

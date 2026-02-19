@@ -15,14 +15,14 @@ const HoloID = () => {
             <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-neon-cyan z-30" />
 
             {/* The Image Container */}
-            <div className="relative w-full h-full overflow-hidden rounded-xl grayscale group-hover:grayscale-0 transition-all duration-500 bg-cyber-black">
+            <div className="relative w-full h-full overflow-hidden rounded-xl  group-hover:grayscale-0 transition-all duration-500 bg-cyber-black">
                 <Image
-                    src="/dp.jpg" // ⚠️ ACTION: Rename your file in public folder to 'DP.jpg' exactly, or change this string.
+                    src="/dp.jpg" 
                     alt="Identity"
                     fill
-                    priority // Loads immediately (Crucial for LCP)
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // ⚠️ FIX: Tells browser which size to download
-                    className="object-cover opacity-80 group-hover:opacity-100 mix-blend-luminosity group-hover:mix-blend-normal"
+                    priority 
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+                    className="object-cover  group-hover:opacity-100 mix-blend-luminosity group-hover:mix-blend-normal"
                 />
 
                 {/* Animated Scanner Bar */}

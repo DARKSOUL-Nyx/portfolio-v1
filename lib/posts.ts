@@ -2,9 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const postsDirectory = path.join(process.cwd(), 'content');
+// CHANGE 1: Update the path to point specifically to "content/logs"
+const postsDirectory = path.join(process.cwd(), 'content', 'logs');
 
-// 1. Define the Interface for your Post Metadata
 export interface PostData {
   id: string;
   date: string;
@@ -12,28 +12,35 @@ export interface PostData {
   excerpt: string;
   tags: string[];
   readTime: string;
-  content: string; // The raw markdown body
+  content: string;
 }
 
 export function getSortedPostsData() {
-  const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
-    const id = fileName.replace(/\.mdx$/, '');
-    const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const matterResult = matter(fileContents);
+  // Check if directory exists to prevent crashes if folder is missing
+  if (!fs.existsSync(postsDirectory)) {
+    return [];
+  }
 
-    // 2. Cast the result to your Interface
-    return {
-      id,
-      ...(matterResult.data as Omit<PostData, 'id' | 'content'>),
-    };
-  });
+  const fileNames = fs.readdirSync(postsDirectory);
+  
+  // CHANGE 2: Filter to only process .mdx files (ignores system files or subfolders)
+  const allPostsData = fileNames
+    .filter((fileName) => fileName.endsWith('.mdx'))
+    .map((fileName) => {
+      const id = fileName.replace(/\.mdx$/, '');
+      const fullPath = path.join(postsDirectory, fileName);
+      const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const matterResult = matter(fileContents);
+
+      return {
+        id,
+        ...(matterResult.data as Omit<PostData, 'id' | 'content'>),
+      };
+    });
 
   return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-// 3. Explicitly type the return value here
 export function getPostData(id: string): PostData {
   const fullPath = path.join(postsDirectory, `${id}.mdx`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
