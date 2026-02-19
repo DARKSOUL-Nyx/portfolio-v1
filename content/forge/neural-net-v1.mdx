@@ -1,0 +1,25 @@
+---
+title: "Autonomous Drone Swarm"
+date: "2025-12-01"
+description: "A decentralized control system for coordinating 50+ drones in zero-trust environments."
+status: "Active"
+tech: ["Rust", "Tauri", "Python", "YOLOv8"]
+link: "https://github.com/yourusername/drone-swarm"
+tags: ["Robotics", "AI", "Edge Computing"]
+---
+
+## The Mission
+Coordinating multiple drones without a central server is a classic distributed systems problem. In this project, I implemented a **Boid Flocking Algorithm** modified for latency-constrained hardware.
+
+### Key Architecture
+* **Edge Nodes**: Raspberry Pi 5 w/ Hailo-8 AI Accelerator.
+* **Comms**: LoRaWAN mesh network (915MHz).
+* **Protocol**: Custom UDP-based gossip protocol for state sharing.
+
+## Performance
+| Metric | Cloud Based | Edge (My Solution) |
+| :--- | :--- | :--- |
+| Latency | 200ms | **15ms** |
+| Bandwidth | 5MB/s | **50KB/s** |
+
+> **Status Update:** Currently rewriting the pathfinding module in Rust for 20% performance gain.

@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Terminal, Box, Wrench, ArrowUpRight, Layers, Cpu } from "lucide-react";
+import { getSortedContent } from "@/lib/content";
 
 const tools = [
     {
@@ -38,6 +39,8 @@ const tools = [
 ];
 
 export default function Forge() {
+    const projects = getSortedContent("forge");
+
     return (
         <div className="min-h-screen pt-32 px-6 pb-40 max-w-7xl mx-auto relative">
 
@@ -67,7 +70,7 @@ export default function Forge() {
             <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {tools.map((tool, i) => (
                     <motion.div
-                        key={tool.title}
+                        key={projects.title}
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.4, delay: i * 0.1 }}
