@@ -86,7 +86,7 @@ export default function RootLayout({
         <div className="relative z-10 min-h-screen">
           {children}
         </div>
-
+        <Analytics/>
         {/* Navigation (Always Available) */}
         <Dock />
 
