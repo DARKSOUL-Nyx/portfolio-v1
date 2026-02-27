@@ -5,7 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: '/private/', // Add any folders you want to hide from search results
     },
-    sitemap: 'https://yourdomain.com/sitemap.xml',
+    sitemap: 'https://vssnishwan.xyz/sitemap.xml',
   };
 }
