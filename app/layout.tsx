@@ -6,6 +6,7 @@ import NeuralBackground from "./components/NeuralBackground";
 import Dock from "./components/Dock";
 // app/layout.tsx
 import { GoogleAnalytics } from '@next/third-parties/google'; // Import the component
+import { Analytics } from "@vercel/analytics/next"
 
 // 1. Configure the Code Font
 const jetbrains = JetBrains_Mono({
