@@ -29,13 +29,13 @@ export const profile = {
       title: "SentinLLM",
       description: "An Autonomous Deception & Containment Framework for Large Language Models. Engineered to handle specific vulnerabilities and secure tool execution.",
       tech: ["LLMs", "Agentic AI", "Security Architecture"],
-      link: "#" 
+      link: "https://github.com/DARKSOUL-Nyx/sentinllm-demo" 
     },
     {
       title: "CodeReaper",
       description: "A multi-agent ecosystem designed for the automated, safe refactoring of legacy codebases.",
       tech: ["Multi-Agent Systems", "Python"],
-      link: "#"
+      link: "https://github.com/DARKSOUL-Nyx/CodeReaper"
     },
     {
       title: "Nexus Lite",
