@@ -1,12 +1,27 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* app/globals.css */
+@import "tailwindcss";
+
+/* THIS IS HOW TAILWIND v4 REGISTERS FONTS */
+@theme {
+  --font-clash: var(--font-clash), sans-serif;
+  --font-satoshi: var(--font-satoshi), sans-serif;
+}
 
 @layer base {
+  :root {
+    --background: #050505;
+    --foreground: #e5e5e5;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
-    background-color: #050505;
+    background-color: var(--background);
+    color: var(--foreground);
     /* Pure CSS Dot Grid */
-    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-    background-size: 32px 32px; /* Adjust this to make the grid tighter or wider */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.10) 1px, transparent 1px);
+    background-size: 32px 32px;
+    overflow-x: hidden;
   }
 }

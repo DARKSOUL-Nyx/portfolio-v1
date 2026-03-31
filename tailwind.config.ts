@@ -1,3 +1,4 @@
+// tailwind.config.ts
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -8,18 +9,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // 1. ADD YOUR NEW FONTS HERE
       fontFamily: {
-        mono: ['var(--font-jetbrains)'], // Code
-        display: ['var(--font-orbitron)'], // Headers (The "Cool" Font)
-        body: ['var(--font-rajdhani)'], // Reading Text
+        clash: ["var(--font-clash)", "sans-serif"],
+        satoshi: ["var(--font-satoshi)", "sans-serif"],
       },
       colors: {
-        // The "Dark Soul" Palette
-        'cyber-black': '#020204', // Deeper than standard black
-        'cyber-gray': '#121214',  // For card backgrounds
-        'neon-cyan': '#00f3ff',   // Primary accent (Intelligence)
-        'neon-purple': '#bc13fe', // Secondary accent (Creative)
-        'matrix-green': '#00ff41', // Success states
+        background: "var(--background)",
+        foreground: "var(--foreground)",
       },
     },
   },

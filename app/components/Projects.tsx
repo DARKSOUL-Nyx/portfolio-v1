@@ -1,64 +1,82 @@
 // app/components/Projects.tsx
 "use client";
 
-import { profile } from "../data/profile"; // Ensure this path matches where you saved profile.ts
+import { motion } from "framer-motion";
+import { profile } from "../data/profile";
 
 export default function Projects() {
   return (
-    <section className="relative w-full px-6 sm:px-12 max-w-5xl mx-auto py-32">
+    <section className="relative w-full px-6 sm:px-12 max-w-6xl mx-auto py-32 z-10">
       
-      <div className="mb-20">
-        <h2 className="text-sm font-semibold tracking-widest uppercase text-neutral-500 mb-2">
-          System Core // 02
+      {/* Massive Section Header */}
+      <div className="mb-24 sm:mb-32">
+        <h2 className="text-sm font-satoshi font-bold tracking-[0.2em] uppercase text-neutral-500 mb-4">
+          Capabilities // 02
         </h2>
-        <p className="font-syne text-4xl sm:text-5xl font-bold text-white tracking-tight">
-          Selected Arsenal.
-        </p>
+        <h3 className="font-clash text-5xl sm:text-7xl font-bold text-white tracking-tighter">
+          Featured Works.
+        </h3>
       </div>
 
-      {/* The Sticky Stack Container */}
-      <div className="flex flex-col gap-12 relative">
+      {/* The Sticky Stacking Container */}
+      <div className="flex flex-col relative pb-32">
         {profile.projects.map((project, index) => (
-          <div 
+          <motion.div 
             key={project.title}
-            className="sticky top-20 pt-8" // The magic CSS that makes them stack
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="sticky w-full"
             style={{ 
-              zIndex: index, // Ensures newer cards stack on top
-              top: `calc(10vh + ${index * 40}px)` // Offsets each card slightly down
-            }} 
+              top: `calc(15vh + ${index * 40}px)`, // Creates the physical stacking offset
+              zIndex: index, 
+            }}
           >
-            <div className="w-full bg-[#0a0a0a] border border-neutral-800 rounded-2xl p-8 sm:p-12 shadow-2xl transition-all hover:border-neutral-600 group">
+            {/* The Project Card */}
+            <div className="w-full bg-[#0a0a0a] border border-neutral-800 rounded-[2rem] p-8 sm:p-14 shadow-[0_-20px_40px_rgba(0,0,0,0.4)] transition-all duration-500 hover:border-neutral-600 group relative overflow-hidden">
               
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8 border-b border-neutral-800/50 pb-8">
-                <h3 className="text-3xl sm:text-4xl font-syne font-bold text-neutral-200 group-hover:text-white transition-colors">
+              {/* Subtle top glare effect for a premium glass feel */}
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+              <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-10">
+                <h4 className="text-4xl sm:text-5xl font-clash font-bold text-neutral-100 group-hover:text-white transition-colors">
                   {project.title}
-                </h3>
+                </h4>
+                
                 <a 
                   href={project.link} 
                   target="_blank" 
                   rel="noreferrer"
-                  className="px-6 py-3 rounded-full bg-white text-black text-sm font-bold tracking-wide hover:bg-neutral-300 transition-colors"
+                  className="flex items-center justify-center px-8 py-4 rounded-full bg-white text-black font-satoshi font-bold text-sm tracking-wide hover:bg-neutral-200 hover:scale-105 transition-all duration-300"
                 >
-                  View Source ↗
+                  View Source 
+                  <span className="ml-2 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
                 </a>
               </div>
 
-              <p className="text-lg text-neutral-400 leading-relaxed max-w-3xl mb-10">
-                {project.description}
-              </p>
+              <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
+                <p className="font-satoshi text-lg sm:text-xl text-neutral-400 leading-relaxed lg:w-2/3">
+                  {project.description}
+                </p>
 
-              <div className="flex flex-wrap gap-3">
-                {project.tech.map(t => (
-                  <span key={t} className="px-4 py-2 rounded-lg bg-neutral-900 border border-neutral-800 text-xs font-medium text-neutral-300 tracking-wide uppercase">
-                    {t}
-                  </span>
-                ))}
+                <div className="lg:w-1/3 flex flex-wrap content-start gap-3">
+                  {project.tech.map(t => (
+                    <span 
+                      key={t} 
+                      className="px-4 py-2 rounded-full bg-neutral-900 border border-neutral-800 text-sm font-satoshi font-medium text-neutral-300 tracking-wide"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
               
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
+      
     </section>
   );
 }
