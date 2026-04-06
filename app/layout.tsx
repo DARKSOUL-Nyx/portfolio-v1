@@ -1,7 +1,6 @@
 import localFont from "next/font/local";
 import type { Metadata } from "next";
 import "./globals.css";
-import Cursor from "./components/Cursor";
 // Load multiple weights for your massive headers
 const clash = localFont({
   src: [
@@ -55,7 +54,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="dark">
       {/* Apply the CSS variables to the body */}
       <body className={`${satoshi.variable} ${clash.variable} font-satoshi antialiased bg-[#050505] text-neutral-200 min-h-screen`}>
-        <Cursor />
         {children}
         
       </body>
